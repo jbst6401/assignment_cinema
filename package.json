@@ -4,7 +4,7 @@
 	"description": "BENR2423 Cinema Visitor System API",
 	"main": "main.js",
 	"engines": {
-		"node":"14.x"
+		"node":"16.x"
 	},
 
 
