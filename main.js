@@ -28,7 +28,7 @@ const options={
 		openapi:'3.0.0',
 		info:{
 			title:'Cinema_Assignment',
-			version:'20220527'
+			version:'1.0.0'
 		}
 },
 	apis:['./main.js'],//

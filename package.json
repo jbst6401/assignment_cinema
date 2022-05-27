@@ -1,6 +1,6 @@
 {
 	"name":"benr2423_cinema",
-	"version":"20220527",
+	"version":"1.0.0",
 	"description": "BENR2423 Cinema Visitor System API",
 	"main": "main.js",
 	"engines": {
