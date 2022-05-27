@@ -15,22 +15,22 @@ describe('Express Route Test', function () {
 		return request
 			.post('/login')
 			.send({username: 'happy123', password: "pass123" })
-			//.expect('Content-Type', /json/)
-			.expect('Content-Type', /text/)
-			.expect(200).then(res => {
-				expect(res.text).toBe("Login Successfully");
+			.expect('Content-Type', /json/)
+			//.expect('Content-Type', /text/)
+			.expect(200).then(response => {
+				console.log("Create City:",response.body);
+				expect(response.body).toEqual(
+					expect.objectContaining({
+						// _id: expect.any(String),
+                         ID: expect.any(String),
+						 Phone:expect.any(String),
+						 IC:expect.any(String),
+						 MyS_status:expect.any(String),
+						 Email:expect.any(String),
+						 Member: expect.any(String)
+                })
+				);
 			});
-			// .then(response => {
-			// 	//console.log("Register Main Test",response.body);
-			// 	expect(response.body).toEqual(
-			// 		expect.objectContaining({
-			// 			//  _id: expect.any(String),
-			// 			// cust_id: expect.any(String),
-			// 			//  password: expect.any(String),
-			// 			//  phone: expect.any(Number),
-			// 		})
-			// 	);
-			// });
 	});
 
 	it('login failed', async () => {
@@ -49,23 +49,20 @@ describe('Express Route Test', function () {
 	it('register', async () => {
 		return request
 			.post('/register')
-			.send({username: "happy012main", password: "password", phone:"123456"})
+			//username, password, phone,ic,mys_status,email,member
+			.send({username: "happy012main",
+			password: "password", 
+			phone:"123456",
+			ic:"12-12-12", 
+			mys_status:"3d",
+			email:"happy012@gmail.com",
+			member: "active"})
 			//.expect('Content-Type', /json/)
 			.expect('Content-Type', /text/)
 			.expect(200).then(res => {
 				expect(res.text).toBe("Customer Registered");
 			});
-			// .then(response => {
-			// 	//console.log("Register Main Test",response.body);
-			// 	expect(response.body).toEqual(
-			// 		expect.objectContaining({
-			// 			//  _id: expect.any(String),
-			// 			//  CustomerID: expect.any(String),
-			// 			// phone: expect.any(Number),
-			// 		})
-			// 	);
-			// });
-	});
+		});
 
 	it('register failed', async () => {
 		return request
@@ -78,4 +75,3 @@ describe('Express Route Test', function () {
 			});
 	})
 });
-"Customer ID is not available for registration"
