@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "description": "Cinema Assignment",
   "main": "main.js",
-  "engines":{"node":"16.x"},
+  "engines":{"node":"16.14.x"},
   "dependencies": {
     "abbrev": "^1.1.1",
     "abab": "^2.0.6",
