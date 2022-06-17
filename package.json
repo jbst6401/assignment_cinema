@@ -179,7 +179,6 @@
     "istanbul-lib-source-maps": "^4.0.1",
     "istanbul-reports": "^3.1.4",
     "jake": "^10.8.5",
-    "jest": "^27.5.1",
     "jest-changed-files": "^27.5.1",
     "jest-circus": "^27.5.1",
     "jest-cli": "^27.5.1",
@@ -214,6 +213,7 @@
     "jsesc": "^2.5.2",
     "json-parse-even-better-errors": "^2.3.1",
     "json5": "^2.2.1",
+    "jsonwebtoken": "^8.5.1",
     "kleur": "^3.0.3",
     "leven": "^3.1.0",
     "levn": "^0.3.0",
@@ -393,7 +393,7 @@
   },
   "scripts": {
     "start": "node main.js",
-    "test": "jest"
+    "test": "npx jest --verbose"
   },
   "repository": {
     "type": "git",
@@ -404,5 +404,8 @@
   "bugs": {
     "url": "https://github.com/jbst6401/assignment_cinema/issues"
   },
-  "homepage": "https://github.com/jbst6401/assignment_cinema#readme"
+  "homepage": "https://github.com/jbst6401/assignment_cinema#readme",
+  "devDependencies": {
+    "jest": "^28.1.1"
+  }
 }

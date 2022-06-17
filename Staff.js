@@ -1,4 +1,5 @@
 let staff;
+let users;
 const bcrypt = require('bcrypt');
 const saltRounds=10
 
@@ -25,9 +26,9 @@ class Staff {
 							throw hashError
 						}else {
 							const hash_password = hash
-							//username, password, phone,ic,mys_status,email,member
+							//username, password,name, phone,email, role
 							staff.insertOne(
-								{staff_id:username,
+								{   staff_id:username,
 									staff_password:hash_password,
 									staff_name:name,
 									staff_phone:phone,
@@ -52,7 +53,7 @@ class Staff {
 		}
 		else{return false}}
 
-		static async delete(username, password, staffid) {
+		static async deletestaff(username, password, staffid) {
 			let result=await staff.findOne({staff_id:username});
 			if(result!=null){
 				const result=await staff.findOne({staff_id:username});	
@@ -61,11 +62,10 @@ class Staff {
 							var rrole=result.staff_role
 							if(!doesPasswordMatch) {return false}
 								else{
-									if(rrole="manager"){
-									let updateresult=await staff.deleteOne({staff_id:staffid});
-									console.log(updateresult)
-									let afterupdateresult=await staff.findOne({staff_id:staffid});
-									return afterupdateresult
+									if(rrole=="manager"){
+									let deleteresult=await staff.deleteOne({staff_id:staffid});
+									console.log(deleteresult)
+									return deleteresult
 									}
 									else{return false}
 								}}
@@ -73,43 +73,28 @@ class Staff {
 		}
 	
 
-	static async updatecustphone(username, password, custname, phone) {
-		let result=await staff.findOne({staff_id:username});
-		if(result!=null){
-			const result=await users.findOne({staff_id:username});	
-						const dbspass=result.staff_password
-						const doesPasswordMatch = bcrypt.compareSync(password, dbspass);
-						if(!doesPasswordMatch) {return false}
-							else{
+	static async updatecustphone(custname, phone) {
+								let userid=await users.findOne({cust_id:custname})
+								if(userid!=null){
 								let updateresult=await users.updateOne(
 									{cust_id:custname},{"$set":{cust_phone:phone}});
 								console.log(updateresult)
 								let afterupdateresult=await users.findOne({cust_id:custname});
 								return afterupdateresult
-							}}
-		else{return false}	
-		}
+							}
+							else{return false}
+						}
 	
-	static async updatecustmember(username, password, custname, member) {
-		let result=await staff.findOne({staff_id:username});
-		if(result!=null){
-			const result=await staff.findOne({staff_id:username});	
-						const dbspass=result.staff_password
-						const doesPasswordMatch = bcrypt.compareSync(password, dbspass);
-						var rrole=result.staff_role
-						if(!doesPasswordMatch) {return false}
-							else{
-								if(rrole="manager"){
+	static async updatecustmember(custname, member) {
+									let custread=await users.findOne({cust_id:custname})
+									if (custread!=null){	
 								let updateresult=await users.updateOne(
 									{cust_id:custname},{"$set":{cust_member:member}});
 								console.log(updateresult)
 								let afterupdateresult=await users.findOne({cust_id:custname});
 								return afterupdateresult
-								}
+									}
 								else{return false}
-							}}
-		else{return false}	
-		
-	}
+							}
 }
 module.exports = Staff;

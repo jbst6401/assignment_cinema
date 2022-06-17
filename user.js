@@ -20,7 +20,7 @@ class User {
 		users = await conn.db("CinemaAssignment").collection("Customer")
 	}
 
-	static async register(username, password, phone, ic, mys_status, email, member) {
+	static async register(username, password, name, phone, ic, mys_status, email, member) {
 		// TODO: Check if username exists
 		
 		let result=await users.findOne({cust_id:username});
@@ -51,8 +51,9 @@ class User {
 							const hash_password = hash
 							//username, password, phone,ic,mys_status,email,member
 							users.insertOne(
-								{cust_id:username,
+								{   cust_id:username,
 									cust_password:hash_password,
+									cust_name:name,
 									cust_phone:phone,
 									cust_ic:ic,
 									cust_mysstatus:mys_status,
@@ -69,28 +70,24 @@ class User {
 		// TODO: Check if username exists
 		let result=await users.findOne({cust_id:username});
 		if(result!=null){
-					const result=await users.findOne({cust_id:username});	
-						const dbspass=result.cust_password
-						const doesPasswordMatch = bcrypt.compareSync(password, dbspass);
-						if(!doesPasswordMatch) {return false}
-						else{return result}			
+			const result=await users.findOne({cust_id:username});	
+			const dbspass=result.cust_password
+			const doesPasswordMatch = bcrypt.compareSync(password, dbspass);
+			if(!doesPasswordMatch) {return false}
+			else{return result}			
 		}
 		else{return false}}
 
-	static async updatephone(username, password,phone) {
+	static async updatephone(username,phone) {
 		let result=await users.findOne({cust_id:username});
 		if(result!=null){
-			const result=await users.findOne({cust_id:username});	
-						const dbspass=result.cust_password
-						const doesPasswordMatch = bcrypt.compareSync(password, dbspass);
-						if(!doesPasswordMatch) {return false}
-							else{
-								let updateresult=await users.updateOne({cust_id:username},{"$set":{cust_phone:phone}});
-								console.log(updateresult)
-								let afterupdateresult=await users.findOne({cust_id:username});
-								return afterupdateresult
-							}}
-		else{return false}	
+			let updateresult=await users.updateOne({cust_id:username},{"$set":{cust_phone:phone}});
+			console.log(updateresult)
+			let afterupdateresult=await users.findOne({cust_id:username});
+			return afterupdateresult
 		}
+		else{return false}	
+		
 	}
+}
 module.exports = User;
