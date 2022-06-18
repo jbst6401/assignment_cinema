@@ -494,7 +494,7 @@ app.use('/docs',swaggerUi.serve,swaggerUi.setup(swaggerSpec));
 /**
  * @swagger
  * /updateshowtimes:
- *   post:
+ *   patch:
  *     security:
  *       - bearerAuth: []   
  *     description: Update Showtimes (Staff and Manager Token)
