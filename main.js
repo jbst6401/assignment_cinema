@@ -1247,7 +1247,7 @@ app.patch('/updateshowtime', async (req, res) => {
 
 app.patch('/updateshowtimes',SandMAccessToken, async (req, res) => {
 	console.log('Update Movie ShowTime:',req.body);
-	var updateshowtime= await Movie.updatemovieshowtime(req.body.hallnumber, 
+	var updateshowtime= await Movie.updatemovieshowtime(req.body.hallnum, 
 		req.body.mdate, req.body.mtime, req.body.movieID,req.body.etime);
 	console.log("Update Movie ShowTimeReturn:",updateshowtime)
 	 if (updateshowtime!=false){

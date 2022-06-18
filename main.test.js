@@ -389,7 +389,7 @@ it('Create Showtimes', async () => {
 		it('Update Movie ShowTime', async () => {
 			return request
 				.patch('/updateshowtime')
-				.send({hallnumber:8,mdate:"2022-01-02",mtime:"5.30pm",movieID:"220101-001",etime:"3.30pm"})
+				.send({hallnum:8,mdate:"2022-01-02",mtime:"5.30pm",movieID:"220101-001",etime:"3.30pm"})
 				.expect('Content-Type', /json/)
 				.expect(200).then(response => {
 					console.log("Update Movie:",response.body);
@@ -409,7 +409,7 @@ it('Create Showtimes', async () => {
 		it('Update Movie ShowTime Failed', async () => {
 			return request
 				.patch('/updateshowtime')
-				.send({hallnumber:9,mdate:"2022-01-02",mtime:"5.30pm",movieID:"220101-001",etime:"3.30pm"})
+				.send({hallnum:9,mdate:"2022-01-02",mtime:"5.30pm",movieID:"220101-001",etime:"3.30pm"})
 				//.expect('Content-Type', /json/)
 				.expect('Content-Type', /text/)
 				.expect(403).then(res => {
