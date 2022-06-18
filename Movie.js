@@ -106,9 +106,9 @@ static async bookseat(staffID,custID,showID,mseat) {
 	else{
 		await booking.insertOne({staff_id:staffID,cust_id:custID,show_id:showID,seat_num:mseat})
 		let seats=await hall.findOne({show_id:showID})
-		let aseat=seats.a_seat
-		let bseat=seats.b_seat
-		await hall.updateOne({show_id:showID},{"$set":{a_seat:aseat-1,b_seat:bseat+1}});
+		let aseat=parseInt(seats.a_seat)-1
+		let bseat=parseInt(seats.b_seat)+1
+		await hall.updateOne({show_id:showID},{"$set":{a_seat:aseat,b_seat:bseat}});
 		return true
 	}}
 
