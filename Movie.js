@@ -73,7 +73,7 @@ static async createhallshowtime(showID,hallnumber,mdate,mtime,movieID,ma_seat,mb
 				{$match:{"Movie.mv_id":movieID}},
 				{$group:{
 					_id: "$_id",
-					hallnum: {$out:"$hallnum"},
+					hallnum: {$addToSet:"$hallnum"},
 					date:{$addToSet:"$date"},
 					time:{$addToSet:"$time"},
 					mv_name:{$addToSet:"$Movie.mv_name"},
