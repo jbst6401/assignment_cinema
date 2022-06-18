@@ -493,7 +493,7 @@ app.use('/docs',swaggerUi.serve,swaggerUi.setup(swaggerSpec));
 //Update Showtimes
 /**
  * @swagger
- * /createshowtimes:
+ * /updateshowtimes:
  *   post:
  *     security:
  *       - bearerAuth: []   
