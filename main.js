@@ -880,23 +880,6 @@ app.patch('/phone/:username/:phone',CustAccessToken, async (req, res) => { //Cus
 	else{res.status(403).send("Update Phone Failed")}
 })
 
-app.patch('/postphone',CustAccessToken, async (req, res) => { //Customer Update Phone (Postman)
-	console.log('Update Cust Phone:',req.body);
-	var updatephone = await User.updatephone(req.body.username, req.body.phone);
-	console.log("Update Cust Phone Return:",updatephone)
-	 if (updatephone!=false){
-		res.status(200).json({
-			ID:updatephone.cust_id,
-			Name:updatephone.cust_name,
-			Phone:updatephone.cust_phone,
-			IC:updatephone.cust_ic,
-			MyS_status:updatephone.cust_mysstatus,
-			Email:updatephone.cust_email,
-			Member:updatephone.cust_member
-		});
-	}
-	else{res.status(403).send("Update Phone Failed")}
-})
 //////////////////////////////////////////////////////////
 //staff
 app.get('/stafflogin', async (req, res) => { // Staff Login
@@ -1464,6 +1447,11 @@ function SandMAccessToken(req,res,next){
 				next()
 			});
 		}
+		else{
+			req.user=user
+			next()
+		}
+		
 		});
 }
 
