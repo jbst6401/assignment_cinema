@@ -41,8 +41,9 @@ const swaggerSpec=swaggerJsdoc(options);
 app.use('/docs',swaggerUi.serve,swaggerUi.setup(swaggerSpec));
 /////////////////////////////////////////////////////////////////////////
 //Customer Swagger
-
-//Customer login
+//Customer login, POST:/login/{username}/{password}:
+//Input : username, password
+//Output:  token, username, password, name, phone,ic,mys_status,email,member
 /**
  * @swagger
  * /login/{username}/{password}:
@@ -72,7 +73,9 @@ app.use('/docs',swaggerUi.serve,swaggerUi.setup(swaggerSpec));
  *         description: Invalid Username or Password
  */
 
-//Register
+//Customer Registration, POST/register
+//Input : username, password, name, phone,ic,mys_status,email,member
+//Output: Register Succesfully
 /**
  * @swagger
  * /register:
@@ -109,7 +112,9 @@ app.use('/docs',swaggerUi.serve,swaggerUi.setup(swaggerSpec));
  */
 
 
-//Customer Update Phone
+//Customer Update Phone, PATCH/phone/{username}/{phone}
+//Input: Username, Phone
+//Output: Same as Login 
 /**
  * @swagger
  * /phone/{username}/{phone}:
@@ -146,7 +151,9 @@ app.use('/docs',swaggerUi.serve,swaggerUi.setup(swaggerSpec));
 ///////////////////////////////////////////////////////////////////////////
 //staff
 
-//staff login
+//Staff Login, GET/stafflogin/{username}/{password}
+//Input : username, password
+//Output: Token, username, password,name, phone,email, role
 /**
  * @swagger
  * /stafflogin/{username}/{password}:
@@ -177,7 +184,9 @@ app.use('/docs',swaggerUi.serve,swaggerUi.setup(swaggerSpec));
  */
 
 
-//Add staff
+//Add staff, POST/addstaffs
+//Input : username, password,name, phone,email, role
+//Output: Staff Registered
 /**
  * @swagger
  * /addstaffs:
@@ -213,7 +222,10 @@ app.use('/docs',swaggerUi.serve,swaggerUi.setup(swaggerSpec));
  *         description: Access token is missing or invalid
  */
 
-//Staff Update Phone Customer
+//Staff Update Phone Customer,
+//PATCH/staffupdatecustphone/{username}/{phone}
+//Input : Username, Phone
+//Output: Same as Customer Login 
 /**
  * @swagger
  * /staffupdatecustphone/{username}/{phone}:
@@ -247,8 +259,10 @@ app.use('/docs',swaggerUi.serve,swaggerUi.setup(swaggerSpec));
  *         description: Access token is missing or invalid
  */
 
-
 //Staff Update Membership Customer
+// PATCH/staffupdatecustmember/{username}/{member}
+//Input : Username, Phone
+//Output: Same as Customer Login 
 /**
  * @swagger
  * /staffupdatecustmember/{username}/{member}:
@@ -283,6 +297,9 @@ app.use('/docs',swaggerUi.serve,swaggerUi.setup(swaggerSpec));
  */
 
 //Delete staff
+//DELETE/deletestaff/{staff_id}/{password}/{deletestaff_id}
+//Input :StaffID, Password, Delete_StaffID
+//Output: STaff Deleted 
 /**
  * @swagger
  * /deletestaff/{staff_id}/{password}/{deletestaff_id}:
@@ -320,7 +337,9 @@ app.use('/docs',swaggerUi.serve,swaggerUi.setup(swaggerSpec));
 
 //////////////////////////////////////
 //Movie
-//Create Movie 
+//Create Movie, POST/createmovies
+//Input : movieID,moviename,mduration,mdimension
+//Output: Movie Created
 /**
  * @swagger
  * /createmovies:
@@ -353,6 +372,9 @@ app.use('/docs',swaggerUi.serve,swaggerUi.setup(swaggerSpec));
  */
 
 //Check Movie
+//GET/readmovie/{movieID}
+//Input  :movieID
+//Output :moviename,mduration,mdimension
 /**
  * @swagger
  * /readmovie/{movieID}:
@@ -380,6 +402,9 @@ app.use('/docs',swaggerUi.serve,swaggerUi.setup(swaggerSpec));
 
 
 //Update Movie Info
+//PATCH//updatemovie/{MovieID}/{moviename}/{mduration}/{mdimension}
+//Input : movieID,moviename,mduration,mdimension
+//Output: moviename,mduration,mdimension
 /**
  * @swagger
  *  /updatemovie/{MovieID}/{moviename}/{mduration}/{mdimension}:
@@ -428,6 +453,9 @@ app.use('/docs',swaggerUi.serve,swaggerUi.setup(swaggerSpec));
 /////////////////////////////////////////////////
 //Hall
 //Create Showtimes
+//POST/createshowtimes
+//Input :showID,hallnumber,mdate,mtime,movieID,ma_seat,mb_seat
+//Output:Showtime Created
 /**
  * @swagger
  * /createshowtimes:
@@ -467,6 +495,10 @@ app.use('/docs',swaggerUi.serve,swaggerUi.setup(swaggerSpec));
 
 
 //Check Showtimes
+//GET/readshowtime/{movieID}
+//Input: movieID
+//Output :Hallnum, Date, Time, Movie, Duration,
+//        Dimension, AvailableSeat, BookedSeat
 /**
  * @swagger
  * /readshowtime/{movieID}:
@@ -491,6 +523,10 @@ app.use('/docs',swaggerUi.serve,swaggerUi.setup(swaggerSpec));
  */
 
 //Update Showtimes
+//PATCH /updateshowtimes
+//Input:hallnumber, mdate, mtime, movieID,etime
+//Output :Hallnum, Date, Time, Movie, Duration,
+//        Dimension, AvailableSeat, BookedSeat
 /**
  * @swagger
  * /updateshowtimes:
@@ -532,6 +568,9 @@ app.use('/docs',swaggerUi.serve,swaggerUi.setup(swaggerSpec));
 //Booking 
 
 //Create Booking by Customer
+//POST/bookingcust
+//Input :custID,showID,mseat
+//Output:Booking Created
 /**
  * @swagger
  * /bookingcust:
@@ -563,6 +602,9 @@ app.use('/docs',swaggerUi.serve,swaggerUi.setup(swaggerSpec));
 
 
 //Create Booking by Staff
+//POST/bookingstaff
+//Input :custID,showID,mseat
+//Output:Booking Created
 /**
  * @swagger
  * /bookingstaff:
@@ -595,6 +637,10 @@ app.use('/docs',swaggerUi.serve,swaggerUi.setup(swaggerSpec));
  */
 
 // Customer Check Booking 
+// GET/readbookingcust/{custID}/{showID}
+//Input: custID, showID
+//Output:StaffID,CustID,Hallnum,,Time
+//       Movie,Duration,Dimension,SeatNumber
 /**
  * @swagger
  * /readbookingcust/{custID}/{showID}:
@@ -646,6 +692,10 @@ app.use('/docs',swaggerUi.serve,swaggerUi.setup(swaggerSpec));
  */
 
 // Staff Check Booking 
+// GET/readbookingstaff/{custID}/{showID}
+//Input: custID, showID
+//Output:StaffID,CustID,Hallnum,,Time
+//       Movie,Duration,Dimension,SeatNumber
 /**
  * @swagger
  * /readbookingstaff/{custID}/{showID}:
@@ -699,6 +749,8 @@ app.use('/docs',swaggerUi.serve,swaggerUi.setup(swaggerSpec));
 
 ///////////////////////////////////////////
 //Scehmas 
+//Security Schemes and Security for JWT Token
+// Schema for Customer, Staff, Movie and Showtimes
 /**
  * @swagger
  * components:
